@@ -1,0 +1,50 @@
+<section class="min-h-screen p-8">
+  <h1 class="mb-8 text-3xl text-center">
+    <strong>List of Users</strong>
+  </h1>
+  <div class="py-4 px-10 bg-gray-500 rounded-md">
+    <table class="table w-full">
+      <thead>
+        <tr>
+          <th class="p-4 text-left">No</th>
+          <th class="p-4 text-left">Name</th>
+          <th class="p-4 text-left">Email</th>
+          <th class="p-4 text-left">Website</th>
+          <th class="p-4"></th>
+        </tr>
+      </thead>
+      <tbody>
+        @if(loading) {
+        <tr>
+          <td class="p-4 bg-gray-900 text-center" colspan="5">
+            <strong class="title-font text-3xl mb-4"> Loading . . . </strong>
+          </td>
+        </tr>
+        } @else { @for (user of users; track user; let index = $index, odd = $odd, even = $even) {
+        <tr>
+          <td class="p-4 {{ odd ? 'bg-gray-500' : 'bg-gray-700' }}">{{ index + 1 }}</td>
+          <td class="p-4 {{ odd ? 'bg-gray-500' : 'bg-gray-700' }}">{{ user.name }}</td>
+          <td class="p-4 {{ odd ? 'bg-gray-500' : 'bg-gray-700' }}">{{ user.email }}</td>
+          <td class="p-4 {{ odd ? 'bg-gray-500' : 'bg-gray-700' }}">
+            <a href="https://{{ user.website }}" target="_blank">{{ user.website }}</a>
+          </td>
+          <td class="py-2 px-4 text-center {{ odd ? 'bg-gray-500' : 'bg-gray-700' }}">
+            <button
+              routerLink="/users/{{ user.id }}"
+              class="w-full py-1 px-2 bg-gray-50 hover:bg-inherit hover:text-gray-50 border border-gray-50 text-gray-800 text-sm rounded transition-all"
+            >
+              Detail
+            </button>
+          </td>
+        </tr>
+        } @empty {
+        <tr>
+          <td class="p-4 bg-gray-900 text-center" colspan="5">
+            <strong class="title-font text-3xl mb-4"> No data </strong>
+          </td>
+        </tr>
+        } }
+      </tbody>
+    </table>
+  </div>
+</section>
